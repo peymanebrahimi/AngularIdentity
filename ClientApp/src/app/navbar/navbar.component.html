@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+    <div>
+
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <a mat-button routerLink="/">Angular Identity</a>
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <div *ngIf="!(isSmallScreen$ | async)">
+
+        <a mat-button routerLink="/" routerLinkActive="active">Home</a>
+        <a mat-button routerLink="/counter" routerLinkActive="active">Counter</a>
+        <a mat-button routerLink="/fetch-data" routerLinkActive="active">Fetch data</a>
+        <a mat-button routerLink="/backapp" routerLinkActive="active">backapp</a>
+        <a mat-button routerLink="/ContentProjection" routerLinkActive="active">ContentProjection</a>
+        <a mat-button routerLink="/ngTemplate" routerLinkActive="active">NgTemplate</a>
+        <a mat-button routerLink="/reactive" routerLinkActive="active">Rxjs 6</a>
+
+        <!-- <app-login-menu></app-login-menu> -->
+        <ng-container *ngIf="isAuthenticated | async">
+            <a mat-button [routerLink]='["/authentication/profile"]' title="Manage">Hello {{ userName | async }}</a>
+            <a mat-button [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+        </ng-container>
+
+        <ng-container *ngIf="!(isAuthenticated | async)">
+            <a mat-button [routerLink]='["/authentication/register"]'>Register</a>
+            <a mat-button [routerLink]='["/authentication/login"]'>Login</a>
+        </ng-container>
+
+    </div>
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button>
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button>
+        <mat-icon>share</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="(isSmallScreen$ | async)">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+</mat-toolbar>
