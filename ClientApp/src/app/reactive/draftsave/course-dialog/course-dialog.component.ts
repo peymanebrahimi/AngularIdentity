@@ -5,7 +5,6 @@ import { Course } from "../../model/course";
 import * as moment from 'moment';
 import { filter, concatMap, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { CourseService } from '../course.service';
 
 @Component({
@@ -14,7 +13,7 @@ import { CourseService } from '../course.service';
   styleUrls: ['./course-dialog.component.css']
 })
 export class CourseDialogComponent implements OnInit {
-  url = environment.apiUrl;
+  private url: string;
 
   form: FormGroup;
 
@@ -31,7 +30,10 @@ export class CourseDialogComponent implements OnInit {
     private courseService: CourseService,
     private dialogRef: MatDialogRef<CourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) course: Course,
-  ) {
+    @Inject('BASE_URL') baseUrl: string) {
+
+    this.url = `${baseUrl}courses`;
+
     this.course = course;
 
     this.form = this.fb.group({

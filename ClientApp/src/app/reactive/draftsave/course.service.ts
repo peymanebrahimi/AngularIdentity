@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { environment } from "../../../environments/environment";
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Course } from "../model/course";
 import { Observable } from 'rxjs';
@@ -9,9 +8,13 @@ import { Lesson } from '../model/lesson';
   providedIn: 'root'
 })
 export class CourseService {
-  url = `${environment.apiUrl}/courses`;
+  // url = `${environment.apiUrl}/courses`;
+  private url: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string) {
+    this.url = `${baseUrl}courses`;
+  }
 
 
   getCourses(): Observable<Course[]> {
